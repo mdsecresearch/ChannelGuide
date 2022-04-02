@@ -1,0 +1,127 @@
+﻿<controls:MetroWindow x:Class="ManagedInjector.GUI.UI.MainWindow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManagedInjector.GUI"
+        xmlns:ui="clr-namespace:ManagedInjector.GUI.UI.MainWindow"
+        mc:Ignorable="d"
+        Title="Channel Guide (MDSec)" Height="500" Width="850" Icon="/UI/MainWindow/mdsec_logo_blue__1__21d_icon.ico" ShowIconOnTitleBar="True" ShowTitleBar="True">
+
+
+
+    <Grid d:DataContext="{d:DesignInstance ui:MainWindowVM}">
+<Grid.ColumnDefinitions>
+<ColumnDefinition Width="*" />
+<ColumnDefinition Width="256px" />
+</Grid.ColumnDefinitions>
+
+<!-- setting event on DataGrid instead of DataGridRow because that doesn't seem to work -->
+<DataGrid Grid.Column="0"
+    ItemsSource="{Binding Processes}" SelectedItem="{Binding SelectedProcess}"
+    AutoGenerateColumns="False">
+<DataGrid.Columns>
+<DataGridTextColumn Header="Pid" Width="64" Binding="{Binding Pid, Mode=OneWay}" IsReadOnly="True"/>
+<DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=OneWay}" IsReadOnly="True"/>
+<DataGridTextColumn Header="Type" Binding="{Binding ArchitectureText, Mode=OneWay}" IsReadOnly="True"/>
+<DataGridTextColumn Header="Arch." Binding="{Binding BitnessText, Mode=OneWay}" IsReadOnly="True"/>
+</DataGrid.Columns>
+</DataGrid>
+
+<DockPanel Grid.Column="1">
+<StackPanel DockPanel.Dock="Top">
+<GroupBox Margin="4" Header="Selected process">
+    <StackPanel>
+        <TextBlock TextWrapping="Wrap" >
+            <Run FontWeight="Bold">PID:</Run>
+            <Run Text="{Binding SelectedProcessId, Mode=OneWay}" />
+            <LineBreak />
+            <Run FontWeight="Bold">Name:</Run>
+            <Run Text="{Binding SelectedProcessName, Mode=OneWay}" />
+            <LineBreak />
+            <Run FontWeight="Bold">Path:</Run>
+            <Run Text="{Binding SelectedProcessFileName, Mode=OneWay}" />
+        </TextBlock>
+    </StackPanel>
+</GroupBox>
+
+                <Button IsEnabled="{Binding SelectAssemblyButtonEnabled, Mode=OneWay}" Command="{Binding SelectAssemblyCommand, Mode=OneTime}">Channel Guide</Button>
+
+                <!-- 
+                
+<GroupBox Margin="4" Header="Assembly to inject">
+    <StackPanel>
+
+        <TextBlock TextWrapping="Wrap">
+            <Run FontWeight="Bold">Path:</Run>
+            <Run Text="{Binding SelectedPath, Mode=OneWay}" />
+            <LineBreak />
+            <Run FontWeight="Bold">Type:</Run>
+            <Run Text="{Binding SelectedType, Mode=OneWay}" />
+            <LineBreak />
+            <Run FontWeight="Bold">Method:</Run>
+            <Run Text="{Binding SelectedMethod, Mode=OneWay}" />
+        </TextBlock>
+    </StackPanel>
+</GroupBox>
+
+-->
+
+
+
+                <GroupBox Margin="4" Header="Reports">
+                    <StackPanel>
+
+            <Grid>
+
+
+
+
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Height="200" x:FieldModifier="public" x:Name="ReportsGrid" Loaded="ReportsGrid_Loaded" MouseEnter="ReportsGrid_MouseEnter">
+
+                                <DataGrid.Columns>
+
+
+                                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+
+                                </DataGrid.Columns>
+                    
+                    
+                                <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridCell}">
+                        </Style>
+                        
+                    </DataGrid.Resources>
+
+
+                </DataGrid>
+
+            </Grid>
+
+    </StackPanel>
+</GroupBox>
+
+
+             
+
+
+
+</StackPanel>
+
+    <!--
+<Grid DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+<Button Command="{Binding AboutCommand, Mode=OneTime}">3- Exploit Remoting Service</Button>
+</Grid>
+    -->
+    
+    
+<Grid DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+
+                <Button Command="{Binding ReportCommand, Mode=OneTime}">View Report</Button>
+</Grid>
+
+
+</DockPanel>
+</Grid>
+</controls:MetroWindow>

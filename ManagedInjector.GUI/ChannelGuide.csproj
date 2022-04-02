@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net5.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <Platforms>AnyCPU;x64</Platforms>
+        <ApplicationIcon>mdsec_logo_blue__1__21d_icon.ico</ApplicationIcon>
+        <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+        <Company>MDSec Consulting Ltd</Company>
+        <Product>ChannelGuide</Product>
+        <Copyright>MDSec Consulting Ltd</Copyright>
+        <Authors>$(AssemblyName)</Authors>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="UI\MainWindow\mdsec_logo_blue__1__21d_icon.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="mdsec_logo_blue__1__21d_icon.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AsmResolver.DotNet" Version="4.5.1" />
+      <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ManagedInjector.Lib\ManagedInjector.Lib.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="UI\MainWindow\mdsec_logo_blue__1__21d_icon.ico" />
+    </ItemGroup>
+
+</Project>
